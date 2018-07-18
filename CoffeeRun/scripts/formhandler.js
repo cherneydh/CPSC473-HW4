@@ -14,13 +14,13 @@
     }
   }
 
-  function showDiv() {
+  /*function showDiv() {
     document.getElementById("payment").style.display = "block";
   }
 
   function hideDiv() {
     document.getElementById("info").style.display = "none";
-  }
+  }*/
 
   FormHandler.prototype.addSubmitHandler = function(fn) {
     this.$formElement.on("submit", function(event) {
@@ -32,8 +32,8 @@
       });
       fn(data);
       //window.location.replace("payment-form.html");
-      hideDiv();
-      showDiv();
+      //hideDiv();
+      //showDiv();
       this.reset();
       this.elements[0].focus();
     });
