@@ -17,23 +17,25 @@
     });
   };
 
-  RemoteDataStore.prototype.getAll = function (cb) {
+  RemoteDataStore.prototype.getAll = function () {
     $.get(this.serverUrl, function (serverResponse) {
       console.log(serverResponse);
-      cb(serverResponse);
     });
   };
 
-  RemoteDataStore.prototype.get = function (key, cb) {
-    $.get(this.serverUrl + "/" + key, function (serverResponse) {
+  RemoteDataStore.prototype.get = function (key) {
+    $.get(this.serverUrl + "/?emailAddress=" + key, function (serverResponse) {
       console.log(serverResponse);
-      cb(serverResponse);
     });
   };
 
   RemoteDataStore.prototype.remove = function (key) {
-    $.ajax(this.serverUrl + "/" + key, {
-      type: "DELETE"
+    var urlS = this.serverUrl;
+    $.get(urlS + "/?emailAddress=" + key, function (serverResponse) {
+      $.ajax({
+        type: "DELETE",
+        url: urlS + "/" + $(serverResponse).attr("id")
+      });
     });
   };
 
